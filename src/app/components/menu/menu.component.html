@@ -1,0 +1,54 @@
+<div class='main-nav'>
+    <div class='navbar navbar-inverse'>
+        <div class='navbar-header'>
+            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse' [attr.aria-expanded]='isExpanded' (click)='toggle()'>
+                <span class='sr-only'>Banco bluebank</span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+            </button>
+            <a class='navbar-brand' [routerLink]='["/"]'>Banco BlueBank</a>
+        </div>
+        <div class='clearfix'></div>
+        <div class='navbar-collapse collapse' [ngClass]='{ "in": isExpanded }'>
+          <ul class='nav navbar-nav'>
+            <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+              <a [routerLink]='["/"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-home'></span> Home
+              </a>
+            </li>
+            <li [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/clientes"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-education'></span> Clientes
+              </a>
+            </li>
+            <li [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/cuentas"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-th-list'></span>  Cuentas
+              </a>
+            </li>
+
+            <li [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/movimientos"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-th-list'></span> Movimientos
+              </a>
+            </li>
+            <li [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/consultasaldo"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-th-list'></span> Saldos
+              </a>
+            </li>
+            <li *ngIf="!estaLogueado()" [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/register-login"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-th-list'></span> Register / Login
+              </a>
+            </li>
+            <li *ngIf="estaLogueado()" [routerLinkActive]='["link-active"]'>
+              <a (click)='logout()'>
+                <span class='glyphicon glyphicon-th-list'></span> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+    </div>
+</div>

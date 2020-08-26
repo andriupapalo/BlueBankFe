@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-md-5 mx-auto">
+        <div class="card animated animated flipInY">
+            <div class="card-header">
+                <h2 class="text-center">Creacion de Cuentas </h2>
+            </div>
+            <div class="card-body">
+                <form class="form">
+
+                    <div class="form-group">
+                        <span>No. Cuenta</span>
+                        <input name="Id" [disabled]="desabilita" type="text" [(ngModel)]="model1.id"
+                            class="form-control" placeholder="Numero de Cuenta" style="display: inline; width: 150px;">
+                    </div>
+
+                    <div class="form-group">
+                        <span>Cliente : </span><select [(ngModel)]="model1.clienteId" [disabled]="desabilita"
+                            [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let tipocli of clientes;let i=index" [value]="tipocli.id"
+                                selected="{{tipocli.id == model1.clienteId}}">
+                                {{tipocli.nombreCompleto}} </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <span>Tipo_Cuenta : </span><select [(ngModel)]="model1.tipoCuentaId" [disabled]="desabilita"
+                            [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let tipoc of tipocuenta;let i=index" [value]="tipoc.id"
+                                selected="{{tipoc.id == model1.tipocuentaId}}">
+                                {{tipoc.descripcion}} </option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <span>Sucursal : </span><select [(ngModel)]="model1.sucursalId" [disabled]="desabilita"
+                            [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let sucu of sucursal;let i=index" [value]="sucu.id"
+                                selected="{{sucu.id == model1.sucursalId}}">
+                                {{sucu.descripcion}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span>Fecha Apertura:</span><input matInput [matDatepicker]="picker" name="fechaApertura"
+                            [disabled]="desabilita" [(ngModel)]="model1.fechaApertura" style="width:100px">
+                        <mat-datepicker-toggle matSuffix [for]=" picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>
+
+
+                    <div class="form-group">
+                        <span>Mon inicial :</span><input name="montoInicial" [disabled]="desabilita" type="number"
+                            [(ngModel)]="model1.montoInicial" class="form-control" placeholder="Monto inicial"
+                            style="display: inline; width: 100px;">
+                    </div>
+
+                    <div class="form-group">
+                        <span>Saldo Actual :</span><input name="saldoActual" [disabled]="desabilita" type="number"
+                            [(ngModel)]="model1.saldoActual" class="form-control" placeholder="Saldo Actual"
+                            style="display: inline; width: 100px;">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="Form-control">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="isActivo" [(ngModel)]="model1.activo"> Activo
+                            </label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="metodoadd" class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" (click)="addcuentas($event)">
+                            Grabar</button>
+                    </div>
+                    <div *ngIf="metodoact" class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" (click)="updatecuentas()">
+                            Actualizar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h1 class="text-center">Lista de Cuentas</h1>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Edad</th>
+                    <th>Tipo.Cuenta</th>
+                    <th>Borrar</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            <tbody>
+                <tr *ngFor="let pa of cuentas;let i=index">
+                    <td>
+                        {{pa.clienteId}}
+                    <td>
+                        {{pa.id}}
+                    </td>
+                    <td>
+                        {{pa.tipoCuentaId}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="borracuenta(pa.id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                    <td class="align-center">
+                        <button class="btn btn-primary" (click)="editcuentas(i)">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

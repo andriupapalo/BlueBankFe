@@ -1,0 +1,132 @@
+<div class="row">
+    <div class="col-md-5 mx-auto">
+        <div class="card animated animated flipInY">
+            <div class="card-header">
+                <h2 class="text-center">Transacciones </h2>
+            </div>
+            <div class="card-body">
+                <form class="form">
+
+                    <div class="form-group">
+                        <span>No.Cuenta : </span><select [(ngModel)]="model3.cuentaId"
+                            [ngModelOptions]="{standalone: true}" (change)="traerdatos(model3.cuentaId)">
+                            <option *ngFor="let cuenta of cuentas;let i=index" [value]="cuenta.id"
+                                selected="{{cuenta.id == model3.cuentaId}}">
+                                {{cuenta.id}} </option>
+                            <pre>{{ cuentas | json }}</pre>
+                        </select>
+                    </div>
+                    <div class="border mb-4">
+                        <div>
+                            <span>Documento : Cliente : {{cedulacliente}}</span>
+                        </div>
+                        <div>
+                            <span>Nombre : {{nombrecliente}}</span>
+                        </div>
+                    </div>
+                    <!--<pre>{{ tipocuenta | json }}</pre>-->
+
+                    <div class="form-group">
+                        <span>Tipo_Cuenta : </span><select [(ngModel)]="model3.tipoCuentaId"
+                            [ngModelOptions]="{standalone: true}" [disabled]="true">
+                            <option *ngFor="let tipoc of tipocuenta;let y=index" [value]="tipoc.id"
+                                selected="{{tipoc.id == model3.tipocuentaId}}">
+                                {{tipoc.descripcion}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span>Tipo_Movimiento : </span><select [(ngModel)]="model3.movimientoId"
+                            [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let tipomov of tipomovimiento;let z=index" [value]="tipomov.id"
+                                selected="{{tipomov.id == model3.movimientoId}}">
+                                {{tipomov.descripcion}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span>Saldo Anterior :</span><input name="saldAnterior" [disabled]="true" type="number"
+                            [(ngModel)]="model3.saldoAnterior" class="form-control" placeholder="Monto inicial"
+                            style="display: inline; width: 100px;">
+                    </div>
+
+                    <div class="form-group">
+                        <span>Valor Movimiento :</span><input name="valorMovimiento" type="number"
+                            [(ngModel)]="model3.valorMovimiento" class="form-control" placeholder="Valor Movimiento"
+                            style="display: inline; width: 100px;"
+                            (change)="validedatos(model3.movimientoId,model3.valorMovimiento,model3.saldoAnterior)">
+                    </div>
+                    <div>
+                        <span class="text-center" style="background-color: brown;">{{mensaje}}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <span>Nuevo Saldo :</span><input name="nuevoSaldo" [disabled]="true" type="number"
+                            [(ngModel)]="model3.nuevoSaldo" class="form-control" placeholder="Nuevo Saldo"
+                            style="display: inline; width: 100px;">
+                    </div>
+                    <!--<div class="form-group">
+                        <span>Fecha Movimiento:</span><input matInput [matDatepicker]="picker" name="fechaMovimiento"
+                            [disabled]="true" [(ngModel)]="model3.fechaMovimiento" style="width:100px">
+                        <mat-datepicker-toggle matSuffix [for]=" picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>-->
+
+                    <div *ngIf="metodoadd" class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" (click)="addmovimientos($event)">
+                            Grabar</button>
+                    </div>
+                    <div *ngIf="metodoact" class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" (click)="updatemovimientos()">
+                            Actualizar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h1 class="text-center"> Movimientos </h1>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>Nro.cuenta</th>
+                    <th>Fehcha Mvto</th>
+                    <th>Transaccion</th>
+                    <th>Saldo Anterior</th>
+                    <th>Valor Mvto</th>
+                    <th>Nuevo saldo</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            <tbody>
+                <tr *ngFor="let pa of movimientos;let i=index">
+                    <td>
+                        {{pa.cuentaId}}
+                    <td>
+                        {{pa.fechaMovimiento}}
+                    </td>
+                    <td>
+                        {{pa.movimientoId}}
+                    </td>
+                    <td>
+                        {{pa.saldoAnterior}}
+                    </td>
+
+                    <td>
+                        {{pa.valorMovimiento}}
+                    </td>
+                    <td>
+                        {{pa.nuevoSaldo}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

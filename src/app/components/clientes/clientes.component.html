@@ -1,0 +1,154 @@
+<div class="row">
+    <div class="col-md-5 mx-auto">
+        <div class="card animated animated flipInY">
+            <div class="card-header">
+                <h2 class="text-center">Creacion de Clientes </h2>
+            </div>
+            <div class="card-body">
+                <form class="form">
+
+                    <div class="form-group" >
+                        <span>No. Documento</span>
+                        <input name="Id" type="text" [(ngModel)]="model.id" class="form-control" placeholder="Numero de Identificacion" style="display: inline; width: 150px;">
+                    </div>
+
+                    <div class="form-group" >
+                        <select [(ngModel)]="model.documentoId" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let tipo of tipodocumento;let i=index" [value]="tipo.id"
+                                selected="{{tipo.id == model.documentoId}}">
+                                {{tipo.descripcion}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" >
+                        <input name="NombreCompleto" type="text" [(ngModel)]="model.nombreCompleto"
+                            class="form-control" placeholder="Nombre Completo">
+                    </div>
+                    <div class="form-group">
+                        <input name="DireccionResidencia" type="text" [(ngModel)]="model.direccionResidencia"
+                            class="form-control" placeholder="Direccion Residencia">
+                    </div>
+
+                    <div class="form-group">
+                        <input name="TelefonoContacto" type="text" [(ngModel)]="model.telefonoContacto"
+                            class="form-control" placeholder="Telefono contacto">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="Email1" [(ngModel)]="model.email" class="form-control"
+                            placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <span>Clave: </span> <input name="ClaveWeb" type="password" [(ngModel)]="model.claveWeb"
+                            class="form-control" placeholder="password" style="display: inline; width: 100px;">
+                    </div>
+
+                    <div class="form-group">
+                        <input matInput [matDatepicker]="picker" name="fechanacimiento" [(ngModel)]="model.fechaNacimiento">
+                        <mat-datepicker-toggle matSuffix [for]=" picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>
+
+                    <div class="form-group" >
+                        <span>Edad :</span><input name="Edad" type="number" [(ngModel)]="model.edad"
+                            class="form-control" placeholder="Edad" style="display: inline; width: 100px;">
+                    </div>
+
+                    <div class="form-group">
+                        <span>Sexo :</span><input name="Sexo" type="text" [(ngModel)]="model.sexo"
+                            class="form-control" placeholder="M/F Unicamente"
+                            style="display: inline; width: 100px;">
+                    </div>
+                    <div>
+                        <span class="text-center" style="background-color: brown;">{{mensaje}}</span>
+                    </div>
+
+
+                    <div *ngIf="metodoadd" class="form-group" >
+                        <button class="btn btn-primary btn-block" type="submit" (click)="addclientes($event)">
+                            Grabar</button>
+                    </div>
+
+                    <div *ngIf="metodoact" class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" (click)="updateclientes()">
+                            Actualizar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h1 class="text-center">Lista de Clientes</h1>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Identificacion</th>
+                    <th>Nro.cuentas</th>
+                    <th>Borrar</th>
+                    <th>Editar</th>
+                    <th>Lis_Cuentas</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            <tbody>
+                <tr *ngFor="let pa of clientes;let i=index">
+                    <td>
+                        {{pa.nombreCompleto}}
+                    <td>
+                        {{pa.id}}
+                    </td>
+                    <td>
+                        {{pa.edad}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="borracliente(pa.id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                    <td class="align-center">
+                        <button class="btn btn-primary" (click)="editcliente(i)">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                    <td class="align-center">
+                        <button class="btn btn-success" (click)="listpacientes(pa.id)">
+                            <i class="fa fa-list"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--    <div *ngIf="verdetalle && arraydet.length!==0" class="col-md-4 mx-auto">
+        <h1 class="text-center">Lista de Cuentas</h1>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>No.Cuenta</th>
+                    <th>Tipo.Cuenta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let arrayDet of arraydet;let i=index">
+                    <td>
+                        {{arrayDet.nombredoctor}}
+                    </td>
+                    <td>
+                        {{arrayDet.especialidad}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>-->
+</div>

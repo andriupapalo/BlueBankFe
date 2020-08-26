@@ -1,0 +1,111 @@
+<div class="row">
+    <div class="col-md-5 mx-auto">
+        <div class="card animated animated flipInY">
+            <div class="card-header">
+                <h2 class="text-center"> Extracto de Movimientos </h2>
+            </div>
+            <div class="card-body">
+                <form class="form">
+
+                    <div class="form-group">
+                        <span>No.Cuenta : </span><select [(ngModel)]="model4.cuentaId"
+                            [ngModelOptions]="{standalone: true}" (change)="traerdatos(model4.cuentaId)">
+                            <option *ngFor="let cuenta of cuentas;let i=index" [value]="cuenta.id"
+                                selected="{{cuenta.id == model4.cuentaId}}">
+                                {{cuenta.id}} </option>
+                            <pre>{{ cuentas | json }}</pre>
+                        </select>
+                    </div>
+                    <div class="border mb-4">
+                        <div>
+                            <span>Documento : Cliente : {{cedulacliente}}</span>
+                        </div>
+                        <div>
+                            <span>Nombre : {{nombrecliente}}</span>
+                        </div>
+                    </div>
+                    <!--<pre>{{ tipocuenta | json }}</pre>-->
+
+                    <div class="form-group">
+                        <span>Tipo_Cuenta : </span><select [(ngModel)]="model4.tipoCuentaId"
+                            [ngModelOptions]="{standalone: true}" [disabled]="true">
+                            <option *ngFor="let tipoc of tipocuenta;let y=index" [value]="tipoc.id"
+                                selected="{{tipoc.id == model4.tipocuentaId}}">
+                                {{tipoc.descripcion}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span>Saldo Actual :</span><input name="saldAnterior" [disabled]="true" type="number"
+                            [(ngModel)]="model4.saldoAnterior" class="form-control" placeholder="Saldo Actual"
+                            style="display: inline; width: 100px;">
+                    </div>
+
+
+                    <div class="form-group">
+                        <span>Fecha Inicial:</span><input matInput [matDatepicker]="picker" name="fechai"
+                            [disabled]="false" [(ngModel)]="fechai" style="width:100px">
+                        <mat-datepicker-toggle matSuffix [for]=" picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>
+
+                    <div class="form-group">
+                        <span>Fecha  final:         </span><input matInput [matDatepicker]="picker1" name="fechaf"
+                            [disabled]="false" [(ngModel)]="fechaf" style="width:100px">
+                        <mat-datepicker-toggle matSuffix [for]=" picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </div>
+                    <div  class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" (click)="consultarmvto(model4.cuentaId,fechai,fechaf)">
+                            Consultar </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="verdetalle">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="text-center"> Movimientos </h1>
+            <table class="table" border="1">
+                <thead>
+                    <tr>
+                        <th>Nro.cuenta</th>
+                        <th>Fehcha Mvto</th>
+                        <th>Transaccion</th>
+                        <th>Saldo Anterior</th>
+                        <th>Valor Mvto</th>
+                        <th>Nuevo saldo</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                <tbody>
+                    <tr *ngFor="let pa of movimientos;let i=index">
+                        <td>
+                            {{pa.cuentaId}}
+                        <td>
+                            {{pa.fechaMovimiento}}
+                        </td>
+                        <td>
+                            {{pa.movimientoId}}
+                        </td>
+                        <td>
+                            {{pa.saldoAnterior}}
+                        </td>
+
+                        <td>
+                            {{pa.valorMovimiento}}
+                        </td>
+                        <td>
+                            {{pa.nuevoSaldo}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+.navbar-nav {
+    font-size: large;
+    width: 100%;
+    text-align: center;
+
+  }
+
+.navbar-nav > li >a{
+    font-size: large;
+      float: none;
+      display: inline-block;
+    }
+
+.dropdown-item{
+    font-size: large;
+    }
+.navbar-brand{
+    font-size:x-large;
+    color: cyan;
+    }    
